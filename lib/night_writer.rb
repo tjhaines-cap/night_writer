@@ -2,8 +2,8 @@
 
 class NightWriter
 
-  def initialize()
-    @braille_filename = "braille.txt"
+  def initialize(mes, br)
+    @braille_filename = br
     @num_characters = 256
     puts message
   end
@@ -14,4 +14,4 @@ class NightWriter
 
 end
 
-night_writer = NightWriter.new
+night_writer = NightWriter.new(ARGV[0], ARGV[1])
