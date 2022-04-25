@@ -20,4 +20,8 @@ class BrailleConverter
     num_characters = braille_chars / 6
   end
 
+  def message
+    "Created \'#{@message_filename}\' containing #{@num_characters} characters"
+  end
+
 end
