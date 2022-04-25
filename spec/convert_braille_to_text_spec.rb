@@ -21,4 +21,11 @@ describe ConvertBrailleToText do
     expect(night_reader.message).to eq("Created 'original_message.txt' containing 11 characters")
   end
 
+  it 'can create a new file and put a message in it' do
+    night_reader = ConvertBrailleToText.new("braille.txt", "original_message.txt")
+    night_reader.convert
+    expect(File.exist?("original_message.txt")).to eq(true)
+    expect(File.size("original_message.txt")).to eq(11)
+  end
+
 end
