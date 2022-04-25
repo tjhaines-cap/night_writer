@@ -31,4 +31,11 @@ describe TextConverter do
     expect(braille_msg).to eq("0.0.0.0.0....00.0.0.00\n00.00.0..0..00.0000..0\n....0.0.0....00.0.0...\n")
   end
 
+  it 'can translate a line longer than 40 characters and format correctly' do
+    night_writer = TextConverter.new("long_message_test.txt", "long_braille.txt")
+    braille_msg = night_writer.convert
+    #check that the first newline is after 80 characters 
+    expect(braille_msg.index("\n")).to eq(80)
+  end
+
 end
