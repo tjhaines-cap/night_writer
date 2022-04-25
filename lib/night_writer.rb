@@ -1,8 +1,12 @@
 require 'pry'
 require_relative 'text_converter'
 
-# message_file = File.open(ARGV[0], "r")
-# message_str = message_file.read.chomp
+if ARGV.length != 2
+  puts "must provide two text file names as arguments"
+  exit
+elsif !File.exist?(ARGV[0])
+  puts "must provide existing text file for first argument"
+  exit
+end
 text_converter = TextConverter.new(ARGV[0], ARGV[1])
 puts text_converter.message
-# puts "Created \'#{ARGV[1]}\' containing #{num_chars} characters"
