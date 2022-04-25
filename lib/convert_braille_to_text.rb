@@ -1,7 +1,7 @@
 require_relative 'dictionaries/text_to_braille'
 require_relative 'dictionaries/braille_to_text'
 
-class BrailleConverter
+class ConvertBrailleToText
 
   attr_reader :num_characters
 

@@ -1,7 +1,7 @@
 require 'simplecov'
 SimpleCov.start
 require 'rspec'
-require './lib/text_converter'
+require './lib/convert_text_to_braille'
 require 'pry'
 
 

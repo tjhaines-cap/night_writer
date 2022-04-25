@@ -1,23 +1,23 @@
 require 'simplecov'
 SimpleCov.start
 require 'rspec'
-require './lib/braille_converter'
+require './lib/convert_braille_to_text'
 require 'pry'
 
-describe BrailleConverter do
+describe ConvertBrailleToText do
 
   it 'exists' do
-    night_reader = BrailleConverter.new("braille.txt", "original_message.txt")
-    expect(night_reader).to be_a(BrailleConverter)
+    night_reader = ConvertBrailleToText.new("braille.txt", "original_message.txt")
+    expect(night_reader).to be_a(ConvertBrailleToText)
   end
 
   it 'can determine number of letters that will be in the message file' do
-    night_reader = BrailleConverter.new("braille.txt", "original_message.txt")
+    night_reader = ConvertBrailleToText.new("braille.txt", "original_message.txt")
     expect(night_reader.num_characters).to eq(11)
   end
 
   it 'constructs message from arguments' do
-    night_reader = BrailleConverter.new("braille.txt", "original_message.txt")
+    night_reader = ConvertBrailleToText.new("braille.txt", "original_message.txt")
     expect(night_reader.message).to eq("Created 'original_message.txt' containing 11 characters")
   end
 
