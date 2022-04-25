@@ -18,4 +18,10 @@ describe TextConverter do
     expect(night_writer.message).to eq("Created 'other.txt' containing 11 characters")
   end
 
+  it 'can create new file and put message in it' do
+    night_writer = TextConverter.new("message_test.txt", "braille.txt")
+    expect(File.exist?("braille.txt")).to eq(true)
+    expect(File.size("braille.txt")).to eq(11)
+  end
+
 end
