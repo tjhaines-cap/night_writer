@@ -9,4 +9,5 @@ elsif !File.exist?(ARGV[0])
   exit
 end
 text_converter = TextConverter.new(ARGV[0], ARGV[1])
+
 puts text_converter.message
