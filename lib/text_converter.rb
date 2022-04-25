@@ -1,3 +1,6 @@
+require_relative 'braille_dictionary'
+require 'pry'
+
 class TextConverter
 
   def initialize(message_file, braille_file)
@@ -5,7 +8,9 @@ class TextConverter
     @braille_filename = braille_file
     @message_file = File.open(@message_filename, "r")
     @message_str = @message_file.read.chomp
+    @message_file.close
     @num_characters = message_length
+    @conversion_table = BrailleDictionary.new.conversion_table
   end
 
   def message
@@ -18,7 +23,26 @@ class TextConverter
 
   def convert
     braille_file = File.open(@braille_filename, "w")
-    braille_file.write(@message_str)
+    total_lines = @num_characters / 40
+    str = ""
+    for line_num in 0..total_lines
+      start = line_num * 40
+      str += convert_line(@message_str[start..(start + 39)])
+    end
+    braille_file.write(str)
+    braille_file.close
+    return str
+  end
+
+  def convert_line(line)
+    str = ""
+    for r in 0..2
+      line.each_char do |char|
+        str += @conversion_table[char][r].join
+      end
+      str += "\n"
+    end
+    return str
   end
 
 end

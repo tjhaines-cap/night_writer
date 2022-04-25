@@ -28,7 +28,7 @@ describe TextConverter do
   it 'can translate characters into braille' do
     night_writer = TextConverter.new("message_test.txt", "braille.txt")
     braille_msg = night_writer.convert
-    expect(braille_msg).to eq("")
+    expect(braille_msg).to eq("0.0.0.0.0....00.0.0.00\n00.00.0..0..00.0000..0\n....0.0.0....00.0.0...\n")
   end
 
 end
