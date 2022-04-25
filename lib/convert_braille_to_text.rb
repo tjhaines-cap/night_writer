@@ -25,4 +25,10 @@ class ConvertBrailleToText
     "Created \'#{@message_filename}\' containing #{@num_characters} characters"
   end
 
+  def convert
+      message_file = File.open(@message_filename, "w")
+      message_file.write(@braille_data)
+  end
+
+
 end
