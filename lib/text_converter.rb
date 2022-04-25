@@ -16,4 +16,9 @@ class TextConverter
     @message_str.length
   end
 
+  def convert
+    braille_file = File.open(@braille_filename, "w")
+    braille_file.write(@message_str)
+  end
+
 end

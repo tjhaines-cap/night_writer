@@ -2,6 +2,7 @@ require 'simplecov'
 SimpleCov.start
 require 'rspec'
 require './lib/text_converter'
+require 'pry'
 
 
 describe TextConverter do
@@ -20,8 +21,8 @@ describe TextConverter do
 
   it 'can create new file and put message in it' do
     night_writer = TextConverter.new("message_test.txt", "braille.txt")
+    night_writer.convert
     expect(File.exist?("braille.txt")).to eq(true)
-    expect(File.size("braille.txt")).to eq(11)
   end
 
 end
