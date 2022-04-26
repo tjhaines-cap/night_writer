@@ -79,6 +79,16 @@ class ConvertTextToBraille
     return str
   end
 
+  def breakup_message(message)
+    message_lines = []
+    num_columns = 0
+    message.each_char do |char|
+
+    end
+  end
+
+  def convert_
+
   def convert_line(line)
     str = ""
     for r in 0..2
