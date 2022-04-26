@@ -57,7 +57,6 @@ class ConvertTextToBraille
     return str
   end
 
-
   def convert_line(line)
     str = ""
     for r in 0..2
