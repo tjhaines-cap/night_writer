@@ -4,6 +4,8 @@ require 'pry'
 
 class ConvertTextToBraille
 
+  attr_reader :num_characters
+
   def initialize(message_file, braille_file)
     @message_filename = message_file
     @braille_filename = braille_file

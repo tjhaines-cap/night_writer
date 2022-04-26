@@ -12,6 +12,11 @@ describe ConvertTextToBraille do
     expect(night_writer).to be_a(ConvertTextToBraille)
   end
 
+  it 'can determine number of letters in the message file' do
+    night_reader = ConvertTextToBraille.new("message_test.txt", "braille.txt")
+    expect(night_reader.num_characters).to eq(11)
+  end
+
   it 'constructs message to output from given arguments' do
     night_writer = ConvertTextToBraille.new("message_test.txt", "braille.txt")
     expect(night_writer.message).to eq("Created 'braille.txt' containing 11 characters")
