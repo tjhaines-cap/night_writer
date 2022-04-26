@@ -45,14 +45,21 @@ class ConvertBrailleToText
   def convert_lines(braille_lines)
     str = ""
     # go from 0 to the length of the brialle_lines in increments of 2
-    
+    next_letter_is_capital = false
     (0..(braille_lines[0].length - 1)).each_slice(2) do |indices|
       braille_letter = []
       #Take two elements from each of the three arrays in braill_lines to construct braille_letter
       braille_lines.each do |braille_line|
         braille_letter << [braille_line[indices[0]],braille_line[indices[1]]]
       end
-      str += @conversion_table[braille_letter]
+      if next_letter_is_capital
+        str += @conversion_table[braille_letter].upcase
+        next_letter_is_capital = false
+      elsif @conversion_table[braille_letter] == "shift"
+        next_letter_is_capital = true
+      else
+        str += @conversion_table[braille_letter]
+      end
     end
     return str
   end
