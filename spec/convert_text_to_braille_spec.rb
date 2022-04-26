@@ -35,7 +35,12 @@ describe ConvertTextToBraille do
   it 'can translate a line longer than 40 characters and format correctly' do
     night_writer = ConvertTextToBraille.new("long_message_test.txt", "long_braille.txt")
     braille_msg = night_writer.convert
-    expect(braille_msg.index("\n")).to eq(80)
+    expect(braille_msg[0..80]).to eq("0.0.00000.00000..0.00.0.00000.00000..0.00.0..000000....00..0.0...0.0...00.0...0.\n")
+    expect(braille_msg[81..161]).to eq("..0....0.00.00000.00..0....0.00.00000.00..0.00...0.0..00000.0...0.0...0000.0....\n")
+    expect(braille_msg[162..242]).to eq("....................0.0.0.0.0.0.0.0.0.0.0000.0000000..0.....0.....0...0.........\n")
+    expect(braille_msg[243..257]).to eq("0.000.0.0.0..0\n")
+    expect(braille_msg[258..272]).to eq("0.0.00..0..000\n")
+    expect(braille_msg[273..287]).to eq("0.0.........0.\n")
   end
 
 end
