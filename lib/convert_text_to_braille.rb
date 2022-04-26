@@ -30,8 +30,8 @@ class ConvertTextToBraille
     #Make each line 40 english characters and convert one line at a time to braille
     total_lines = @num_characters / 40
     for line_num in 0..total_lines
-      start = line_num * 40
-      str += convert_line(@message_str[start..(start + 39)])
+      start_index = line_num * 40
+      str += convert_line(@message_str[start_index..(start_index + 39)])
     end
     braille_file.write(str)
     braille_file.close
@@ -48,7 +48,6 @@ class ConvertTextToBraille
         else
           str += @conversion_table[char][r].join
         end
-        # str += @conversion_table[char][r].join
       end
       str += "\n"
     end
