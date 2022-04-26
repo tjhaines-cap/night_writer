@@ -1,7 +1,8 @@
-require_relative 'braille_dictionary'
+require_relative 'dictionaries/text_to_braille'
+require_relative 'dictionaries/braille_to_text'
 require 'pry'
 
-class TextConverter
+class ConvertTextToBraille
 
   def initialize(message_file, braille_file)
     @message_filename = message_file
@@ -9,15 +10,15 @@ class TextConverter
     @message_file = File.open(@message_filename, "r")
     @message_str = @message_file.read.chomp
     @message_file.close
-    @num_characters = message_length
-    @conversion_table = BrailleDictionary.new.conversion_table
+    @num_characters = number_english_characters
+    @conversion_table = Dictionaries::TEXT_TO_BRAILLE
   end
 
   def message
     message = "Created \'#{@braille_filename}\' containing #{@num_characters} characters"
   end
 
-  def message_length
+  def number_english_characters
     @message_str.length
   end
 
