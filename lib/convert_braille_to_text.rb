@@ -27,6 +27,8 @@ class ConvertBrailleToText
 
   def convert
       message_file = File.open(@message_filename, "w")
+      str = ""
+      num_lines_of_text = 
       message_file.write(@braille_data)
   end
 

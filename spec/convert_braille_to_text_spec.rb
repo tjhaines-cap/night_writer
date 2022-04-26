@@ -27,4 +27,10 @@ describe ConvertBrailleToText do
     expect(File.exist?("original_message.txt")).to eq(true)
   end
 
+  it 'can translate braille into characters' do
+    night_reader = ConvertBrailleToText.new("braille.txt", "original_message.txt")
+    msg = night_reader.convert
+    expect(msg).to eq("hello world")
+  end
+
 end
