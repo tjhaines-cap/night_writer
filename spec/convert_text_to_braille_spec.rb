@@ -48,4 +48,10 @@ describe ConvertTextToBraille do
     expect(braille_msg[273..287]).to eq("0.0.........0.\n")
   end
 
+  it 'can translate capital letters' do
+    night_writer = ConvertTextToBraille.new("capital.txt", "capital_braille.txt")
+    braille_msg = night_writer.convert
+    expect(braille_msg).to eq("..0...0.\n......0.\n.0...0..\n")
+  end
+
 end
