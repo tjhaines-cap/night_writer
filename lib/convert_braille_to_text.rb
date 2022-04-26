@@ -1,5 +1,6 @@
 require_relative 'dictionaries/text_to_braille'
 require_relative 'dictionaries/braille_to_text'
+require 'pry'
 
 class ConvertBrailleToText
 
@@ -9,13 +10,14 @@ class ConvertBrailleToText
     @braille_filename = braille_file
     @message_filename = message_file
     @braille_file = File.open(@braille_filename, "r")
-    @braille_data = @braille_file.readlines
+    @braille_msg_arr = @braille_file.readlines.map(&:chomp)
     @num_characters = message_length
+    @conversion_table = Dictionaries::BRAILLE_TO_TEXT
   end
 
   def message_length
     braille_chars = 0
-    @braille_data.each do |line|
+    @braille_msg_arr.each do |line|
       braille_chars += line.length
     end
     num_characters = braille_chars / 6
@@ -28,8 +30,26 @@ class ConvertBrailleToText
   def convert
       message_file = File.open(@message_filename, "w")
       str = ""
-      num_lines_of_text = 
-      message_file.write(@braille_data)
+      num_lines_of_text = @braille_msg_arr.length / 3
+      for i in 0..(num_lines_of_text - 1)
+        start_line = i * 3
+        #convert braille by rows of three from the text file
+        str += convert_lines(@braille_msg_arr[start_line..(start_line+2)])
+      end
+      message_file.write(str)
+      return str
+  end
+
+  def convert_lines(braille_lines)
+    str = ""
+    (0..(braille_lines[0].length - 1)).each_slice(2) do |indices|
+      braille_letter = []
+      braille_lines.each do |braille_line|
+        braille_letter << [braille_line[indices[0]],braille_line[indices[1]]]
+      end
+      str += @conversion_table[braille_letter]
+    end
+    return str
   end
 
 
