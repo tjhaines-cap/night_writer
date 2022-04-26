@@ -39,6 +39,7 @@ class ConvertBrailleToText
       end
       message_file.write(str)
       message_file.close
+      @num_characters = str.length
       return str
   end
 
