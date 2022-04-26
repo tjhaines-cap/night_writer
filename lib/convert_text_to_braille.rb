@@ -23,61 +23,61 @@ class ConvertTextToBraille
   def number_english_characters
     @message_str.length
   end
-
-  def convert
-    braille_file = File.open(@braille_filename, "w")
-    str = ""
-    #Make each line 40 english characters and convert one line at a time to braille
-    total_lines = @num_characters / 40
-    for line_num in 0..total_lines
-      start_index = line_num * 40
-      str += convert_line(@message_str[start_index..(start_index + 39)])
-    end
-    braille_file.write(str)
-    braille_file.close
-    return str
-  end
-
-  def new_convert
-    braille_file = File.open(@braille_filename, "w")
-    str = ""
-    original_str = @message_str
-    start_char_substr = 0
-    num_chars_translated = 0
-    r = 0
-    while r <= 2
-      new_str = ""
-      row_num_characters = 0
-      original_str.each_char do |char|
-        if (char == char.capitalize) && (char != " ")
-          new_str += @conversion_table['shift'][r].join
-          new_str += @conversion_table[char.downcase][r].join
-          row_num_characters += 1
-        else
-          new_str += @conversion_table[char][r].join
-          row_num_characters += 1
-        end
-        if (new_str.length == 80) || (row_num_characters == original_str.length)
-          str += new_str
-          str += "\n"
-          if r == 2
-            num_chars_translated += row_num_characters
-            original_str = original_str[(num_chars_translated)..-1]
-            start_char_substring = num_chars_translated
-          end
-          break
-        end
-      end
-      if (r == 2) && (num_chars_translated < @num_characters)
-        r = 0
-      else
-        r += 1
-      end
-    end
-    braille_file.write(str)
-    braille_file.close
-    return str
-  end
+  #
+  # def convert
+  #   braille_file = File.open(@braille_filename, "w")
+  #   str = ""
+  #   #Make each line 40 english characters and convert one line at a time to braille
+  #   total_lines = @num_characters / 40
+  #   for line_num in 0..total_lines
+  #     start_index = line_num * 40
+  #     str += convert_line(@message_str[start_index..(start_index + 39)])
+  #   end
+  #   braille_file.write(str)
+  #   braille_file.close
+  #   return str
+  # end
+  #
+  # def new_convert
+  #   braille_file = File.open(@braille_filename, "w")
+  #   str = ""
+  #   original_str = @message_str
+  #   start_char_substr = 0
+  #   num_chars_translated = 0
+  #   r = 0
+  #   while r <= 2
+  #     new_str = ""
+  #     row_num_characters = 0
+  #     original_str.each_char do |char|
+  #       if (char == char.capitalize) && (char != " ")
+  #         new_str += @conversion_table['shift'][r].join
+  #         new_str += @conversion_table[char.downcase][r].join
+  #         row_num_characters += 1
+  #       else
+  #         new_str += @conversion_table[char][r].join
+  #         row_num_characters += 1
+  #       end
+  #       if (new_str.length == 80) || (row_num_characters == original_str.length)
+  #         str += new_str
+  #         str += "\n"
+  #         if r == 2
+  #           num_chars_translated += row_num_characters
+  #           original_str = original_str[(num_chars_translated)..-1]
+  #           start_char_substring = num_chars_translated
+  #         end
+  #         break
+  #       end
+  #     end
+  #     if (r == 2) && (num_chars_translated < @num_characters)
+  #       r = 0
+  #     else
+  #       r += 1
+  #     end
+  #   end
+  #   braille_file.write(str)
+  #   braille_file.close
+  #   return str
+  # end
 
   def breakup_message(message)
     message_lines = []
@@ -98,6 +98,18 @@ class ConvertTextToBraille
       end_index += 1
     end
     return message_lines
+  end
+
+  def convert_message
+    braille_file = File.open(@braille_filename, "w")
+    str = ""
+    message_by_line = breakup_message(@message_str)
+    message_by_line.each do |line|
+      str += convert_line(line)
+    end
+    braille_file.write(str)
+    braille_file.close
+    return str
   end
 
 
