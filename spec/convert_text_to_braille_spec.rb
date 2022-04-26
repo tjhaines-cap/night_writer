@@ -27,7 +27,7 @@ describe ConvertTextToBraille do
   it 'can break up message into lines that will correspond with braille' do
     night_writer = ConvertTextToBraille.new("message_test.txt", "braille.txt")
     message = "This Will Take Up One Line braille This will be on the next line"
-    expect(night_writer.breakup_message(message)).to ["This Will Take Up One Line braille", " This will be on the next line"]
+    expect(night_writer.breakup_message(message)).to eq(["This Will Take Up One Line braille", " This will be on the next line"])
   end
 
   it 'can create new file and put message in it' do

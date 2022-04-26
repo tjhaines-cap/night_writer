@@ -82,12 +82,24 @@ class ConvertTextToBraille
   def breakup_message(message)
     message_lines = []
     num_columns = 0
+    start_index = 0
+    end_index = 0
     message.each_char do |char|
-
+      if char == char.downcase || char == " "
+        num_columns += 2
+      elsif char == char.upcase
+        num_columns += 4
+      end
+      if (num_columns == 80) || (end_index == (message.length - 1))
+        message_lines << message[start_index..end_index]
+        start_index = end_index + 1
+        num_columns = 0
+      end
+      end_index += 1
     end
+    return message_lines
   end
 
-  def convert_
 
   def convert_line(line)
     str = ""
