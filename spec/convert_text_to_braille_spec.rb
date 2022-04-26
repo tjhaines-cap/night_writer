@@ -23,6 +23,7 @@ describe ConvertTextToBraille do
     night_writer = ConvertTextToBraille.new("message_test.txt", "braille.txt")
     night_writer.convert
     expect(File.exist?("braille.txt")).to eq(true)
+    expect(File.read("braille.txt")).to eq("0.0.0.0.0....00.0.0.00\n00.00.0..0..00.0000..0\n....0.0.0....00.0.0...\n")
   end
 
   it 'can translate characters into braille' do
@@ -34,7 +35,6 @@ describe ConvertTextToBraille do
   it 'can translate a line longer than 40 characters and format correctly' do
     night_writer = ConvertTextToBraille.new("long_message_test.txt", "long_braille.txt")
     braille_msg = night_writer.convert
-    #check that the first newline is after 80 characters
     expect(braille_msg.index("\n")).to eq(80)
   end
 

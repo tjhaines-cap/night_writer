@@ -11,11 +11,12 @@ class ConvertBrailleToText
     @message_filename = message_file
     @braille_file = File.open(@braille_filename, "r")
     @braille_msg_arr = @braille_file.readlines.map(&:chomp)
-    @num_characters = message_length
+    @braille_file.close
+    @num_characters = number_english_characters
     @conversion_table = Dictionaries::BRAILLE_TO_TEXT
   end
 
-  def message_length
+  def number_english_characters
     braille_chars = 0
     @braille_msg_arr.each do |line|
       braille_chars += line.length
@@ -37,6 +38,7 @@ class ConvertBrailleToText
         str += convert_lines(@braille_msg_arr[start_line..(start_line+2)])
       end
       message_file.write(str)
+      message_file.close
       return str
   end
 
@@ -51,6 +53,5 @@ class ConvertBrailleToText
     end
     return str
   end
-
 
 end

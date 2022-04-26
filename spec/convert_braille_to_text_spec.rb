@@ -19,12 +19,15 @@ describe ConvertBrailleToText do
   it 'constructs message from arguments' do
     night_reader = ConvertBrailleToText.new("braille.txt", "original_message.txt")
     expect(night_reader.message).to eq("Created 'original_message.txt' containing 11 characters")
+    night_reader = ConvertBrailleToText.new("long_braille.txt", "long_message.txt")
+    expect(night_reader.message).to eq("Created 'long_message.txt' containing 47 characters")
   end
 
   it 'can create a new file and put a message in it' do
     night_reader = ConvertBrailleToText.new("braille.txt", "original_message.txt")
     night_reader.convert
     expect(File.exist?("original_message.txt")).to eq(true)
+    expect(File.read("original_message.txt")).to eq("hello world")
   end
 
   it 'can translate braille into english characters' do
