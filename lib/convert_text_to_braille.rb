@@ -42,7 +42,13 @@ class ConvertTextToBraille
     str = ""
     for r in 0..2
       line.each_char do |char|
-        str += @conversion_table[char][r].join
+        if char == char.capitalize && char != " "
+          str += @conversion_table['shift'][r].join
+          str += @conversion_table[char.downcase][r].join
+        else
+          str += @conversion_table[char][r].join
+        end
+        # str += @conversion_table[char][r].join
       end
       str += "\n"
     end
