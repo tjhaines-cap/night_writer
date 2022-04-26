@@ -1,5 +1,5 @@
 require 'pry'
-require_relative 'text_converter'
+require_relative 'convert_text_to_braille'
 
 if ARGV.length != 2
   puts "must provide two text file names as arguments"
@@ -9,4 +9,5 @@ elsif !File.exist?(ARGV[0])
   exit
 end
 text_to_braille = ConvertTextToBraille.new(ARGV[0], ARGV[1])
+text_to_braille.convert_message
 puts text_to_braille.message

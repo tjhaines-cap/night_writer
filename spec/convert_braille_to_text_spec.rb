@@ -42,4 +42,16 @@ describe ConvertBrailleToText do
     expect(msg).to eq("abcdefghijklmnopqrstuvwxyz this is the alphabet")
   end
 
+  it 'can translate capital letters' do
+    night_reader = ConvertBrailleToText.new("capital_braille.txt", "capital_msg.txt")
+    msg = night_reader.convert
+    expect(msg).to eq("AB")
+  end
+
+  it 'can translate capital and lowercase letters' do
+    night_reader = ConvertBrailleToText.new("long_capital_braille.txt", "long_capital_msg.txt")
+    msg = night_reader.convert
+    expect(msg).to eq("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+  end
+
 end
