@@ -44,8 +44,10 @@ class ConvertBrailleToText
 
   def convert_lines(braille_lines)
     str = ""
+    # go from 0 to the length of the brialle_lines in increments of 2
     (0..(braille_lines[0].length - 1)).each_slice(2) do |indices|
       braille_letter = []
+      #Take two elements from each of the three arrays in braill_lines to construct braille_letter
       braille_lines.each do |braille_line|
         braille_letter << [braille_line[indices[0]],braille_line[indices[1]]]
       end

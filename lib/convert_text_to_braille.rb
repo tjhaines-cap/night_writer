@@ -24,8 +24,9 @@ class ConvertTextToBraille
 
   def convert
     braille_file = File.open(@braille_filename, "w")
-    total_lines = @num_characters / 40
     str = ""
+    #Make each line 40 english characters and convert one line at a time to braille
+    total_lines = @num_characters / 40
     for line_num in 0..total_lines
       start = line_num * 40
       str += convert_line(@message_str[start..(start + 39)])
